@@ -1,5 +1,6 @@
 import 'package:bestream/explore.dart';
 import 'package:bestream/feeds.dart';
+import 'package:bestream/shop.dart';
 import 'package:bestream/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -15,16 +16,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'BESTREAM',
 
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.deepPurple,
+      
+       
+     
       ),
       home:MyHomePage(),
 	debugShowCheckedModeBanner: false,
     );
   }
 }
+
 
 
 class Home extends StatefulWidget {
@@ -63,7 +68,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff483053),
+      backgroundColor: Colors.purple[800],
       appBar: AppBar(
         backgroundColor: Color(0xff290B37),
         title: Row(
@@ -104,6 +109,24 @@ class _HomeState extends State<Home> {
                 new Container(
                   color: Colors.black,
                   child: ExplorePage(),
+                ),
+
+
+                new Container(
+                  color: Colors.black,
+                  
+                ),
+
+                    new Container(
+                  color: Colors.black,
+                  
+                ),
+
+
+
+                  new Container(
+                  color: Colors.black,
+                  child: ShopPage(),
                 ),
                
              

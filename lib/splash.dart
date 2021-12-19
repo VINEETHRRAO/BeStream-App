@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:bestream/login.dart';
 import 'package:bestream/main.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +12,12 @@ class _MyHomePageState extends State<MyHomePage> {
 @override
 void initState() {
 	super.initState();
+  
 	Timer(Duration(seconds: 3),
 		()=>Navigator.pushReplacement(context,
 										MaterialPageRoute(builder:
 														(context) =>
-														Home()
+														LoginScreen()
 														)
 									)
 		);

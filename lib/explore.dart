@@ -15,7 +15,7 @@ class _ExplorePageState extends State<ExplorePage> {
     return Scaffold(
       backgroundColor: Color(0xff483053),
       appBar: AppBar(
-          backgroundColor: Color(0xff483053),
+          backgroundColor: Colors.purple[800],
          title: Container(
            width:350,
            height:26,
@@ -383,10 +383,10 @@ class _ExplorePageState extends State<ExplorePage> {
             ),
              
                 Container(
-          height: 20,
-          width:20,
+          height: 10,
+          width:10,
 
-        child: Image.network('https://bison.usgs.gov/images/spinner2.gif')
+        child: Image.network('https://www.bing.com/th/id/OGC.e4b6323e19e57f6761b1ce47b7d329e0?pid=1.7&rurl=https%3a%2f%2fwww.bluechipexterminating.com%2fwp-content%2fuploads%2f2020%2f02%2floading-gif-png-5.gif&ehk=Fkb%2fpTHkd59sw%2bOIq06%2f7g4Tgqy29TwCUoUCTChOjWw%3d',scale:0.2 ,)
           
           
           ),
