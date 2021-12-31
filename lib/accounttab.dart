@@ -1,19 +1,16 @@
+import 'package:bestream/models/post.dart';
 import 'package:flutter/material.dart';
 import 'package:bestream/models/post.dart';
 import 'package:bestream/models/user.dart';
 import 'package:bestream/models/comment.dart';
 import 'package:bestream/models/global.dart';
 
-class HomeFeed extends StatefulWidget {
-  const HomeFeed({Key? key}) : super(key: key);
-
+class AccountTab1 extends StatefulWidget {
   @override
-  _HomeFeedState createState() => _HomeFeedState();
+  State<AccountTab1> createState() => _AccountTab1State();
 }
 
-class _HomeFeedState extends State<HomeFeed> {
-  static int page = 1;
-
+class _AccountTab1State extends State<AccountTab1> {
   static Post the_post = post1;
   Future navigateToLikesPage(context) async {
     Navigator.push(context,
@@ -27,6 +24,11 @@ class _HomeFeedState extends State<HomeFeed> {
             builder: (context) => getComments(the_post.comments)));
   }
 
+  Future navigateToPage(BuildContext context, Post post) async {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => get1Post(context, post)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return getMain();
@@ -34,212 +36,242 @@ class _HomeFeedState extends State<HomeFeed> {
 
   Widget getMain() {
     return Scaffold(
-      backgroundColor: Color(0xff290B3A),
-      body: Container(
-          child: ListView(
-        children: <Widget>[
-          Divider(),
-          Container(
-            height: 15,
-          ),
-          Column(
-            children: getPosts(context),
-          )
-        ],
-      )),
+      backgroundColor: Color(0xff290B37),
+      body: Center(
+        child: GridView.count(
+          primary: false,
+          padding: const EdgeInsets.all(5),
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
+          crossAxisCount: 3,
+          children: getPosts(context),
+        ),
+      ),
     );
   }
 
   List<Widget> getPosts(BuildContext context) {
     List<Widget> posts = [];
-    int index = 0;
+    int n = 0;
     for (Post post in userPosts) {
-      
-        posts.add(getPost(context, post, index));
-        index++;
-      
+      if (post.user == user) {
+        n = n + 1;
+        posts.add(getPost(context, post));
+      }
     }
-    return posts;
+    if (n == 0) {
+      posts.add(getEmpty(context));
+
+      return posts;
+    } else {
+      return posts;
+    }
   }
 
-  Widget getPost(BuildContext context, Post post, int index) {
+  Widget getPost(BuildContext context, Post post) {
+    return FlatButton(
+      child: Container(
+        constraints: BoxConstraints(maxHeight: 282),
+        decoration: BoxDecoration(
+            color: Color(0xff483053),
+            image: DecorationImage(image: post.image, fit: BoxFit.fill)),
+      ),
+      onPressed: () {
+        setState(() {
+          the_post = post;
+          navigateToLikesPage(context);
+        });
+      },
+    );
+  }
+
+  Widget getEmpty(BuildContext context) {
+    return Center(
+      child: Container(
+        child: Text(
+          "Nothing here to show :)",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
+  Widget get1Post(BuildContext context, Post post) {
     return Container(
-      color: Colors.white,
+        color: Colors.white,
         child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Container(
-          
-          margin: EdgeInsets.all(5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.all(5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Container(
-                    width: 10,
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        width: 10,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        child: CircleAvatar(
+                          backgroundImage: post.user.profilePicture,
+                        ),
+                      ),
+                      Text(
+                        post.user.username,
+                      )
+                    ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: CircleAvatar(
-                      backgroundImage: post.user.profilePicture,
-                    ),
-                  ),
-                  Text(
-                    post.user.username,
-                  )
                 ],
               ),
-             
-            ],
-          ),
-        ),
-      
-        Container(
-          constraints: BoxConstraints(maxHeight: 300),
-          decoration: BoxDecoration(
-              color: Color(0xff483053),image: DecorationImage(image: post.image,fit:BoxFit.fitWidth)),
-        ),
-       
-        Container(
-          color: Colors.white,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
+            ),
+            Container(
+              constraints: BoxConstraints(maxHeight: 300),
+              decoration: BoxDecoration(
+                  color: Color(0xff483053),
+                  image:
+                      DecorationImage(image: post.image, fit: BoxFit.fitWidth)),
+            ),
+            Container(
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Stack(
+                        alignment: Alignment(0, 0),
+                        children: <Widget>[
+                          Icon(
+                            Icons.favorite,
+                            size: 30,
+                            color: post.isLiked ? Colors.red : Colors.black,
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.favorite),
+                            color: post.isLiked ? Colors.red : Colors.black,
+                            onPressed: () {
+                              setState(() {
+                                post.isLiked = post.isLiked ? false : true;
+                                if (!post.isLiked) {
+                                  post.likes.remove(user);
+                                } else {
+                                  post.likes.add(user);
+                                }
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                      Stack(
+                        alignment: Alignment(0, 0),
+                        children: <Widget>[
+                          Icon(
+                            Icons.mode_comment,
+                            size: 30,
+                            color: Colors.black,
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.mode_comment),
+                            color: Colors.black,
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
+                      Stack(
+                        alignment: Alignment(0, 0),
+                        children: <Widget>[
+                          Icon(
+                            Icons.send,
+                            size: 30,
+                            color: Colors.black,
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.send),
+                            color: Colors.black,
+                            onPressed: () {},
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                   Stack(
                     alignment: Alignment(0, 0),
                     children: <Widget>[
                       Icon(
-                        Icons.favorite,
+                        Icons.bookmark,
                         size: 30,
-                        color: post.isLiked ? Colors.red : Colors.black,
+                        color: post.isSaved ? Colors.green : Colors.black,
                       ),
                       IconButton(
-                        icon: Icon(Icons.favorite),
-                        color: post.isLiked ? Colors.red : Colors.black,
+                        icon: Icon(Icons.bookmark),
+                        color: post.isSaved ? Colors.green : Colors.black,
                         onPressed: () {
                           setState(() {
-                            userPosts[index].isLiked =
-                                post.isLiked ? false : true;
-                            if (!post.isLiked) {
-                              post.likes.remove(user);
+                            post.isSaved = post.isSaved ? false : true;
+                            if (!post.isSaved) {
+                              user.savedPosts.remove(post);
                             } else {
-                              post.likes.add(user);
+                              user.savedPosts.add(post);
                             }
                           });
                         },
                       )
                     ],
-                  ),
-                  Stack(
-                    alignment: Alignment(0, 0),
-                    children: <Widget>[
-                      Icon(
-                        Icons.mode_comment,
-                        size: 30,
-                        color: Colors.black,
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.mode_comment),
-                        color: Colors.black,
-                        onPressed: () {},
-                      )
-                    ],
-                  ),
-                  Stack(
-                    alignment: Alignment(0, 0),
-                    children: <Widget>[
-                      Icon(
-                        Icons.send,
-                        size: 30,
-                        color: Colors.black,
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.send),
-                        color: Colors.black,
-                        onPressed: () {},
-                      )
-                    ],
                   )
                 ],
-              ),
-              Stack(
-                alignment: Alignment(0, 0),
-                children: <Widget>[
-                  Icon(
-                    Icons.bookmark,
-                    size: 30,
-                    color: post.isSaved ? Colors.green : Colors.black,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.bookmark),
-                    color: post.isSaved ? Colors.green : Colors.black,
-                    onPressed: () {
-                      setState(() {
-                        userPosts[index].isSaved = post.isSaved ? false : true;
-                        if (!post.isSaved) {
-                          user.savedPosts.remove(post);
-                        } else {
-                          user.savedPosts.add(post);
-                        }
-                      });
-                    },
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
-        FlatButton(
-          child: Text(
-            post.likes.length.toString() + " likes",
-            style: textStyleBold,
-          ),
-          onPressed: () {
-            setState(() {
-              the_post = post;
-              navigateToLikesPage(context);
-            });
-          },
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(left: 15, right: 10),
-              child: Text(
-                post.user.username,
-                style: textStyleBold,
               ),
             ),
-            Flexible(
-              
+            FlatButton(
               child: Text(
-                post.description,
-                style: textStyle,
-                softWrap: true,
+                post.likes.length.toString() + " likes",
+                style: textStyleBold,
               ),
-            )
+              onPressed: () {
+                setState(() {
+                  the_post = post;
+                  navigateToLikesPage(context);
+                });
+              },
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(left: 15, right: 10),
+                  child: Text(
+                    post.user.username,
+                    style: textStyleBold,
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    post.description,
+                    style: textStyle,
+                    softWrap: true,
+                  ),
+                )
+              ],
+            ),
+            FlatButton(
+              child: Text(
+                "View all " + post.comments.length.toString() + " comments",
+                style: textStyleLigthGrey,
+              ),
+              onPressed: () {
+                setState(() {
+                  the_post = post;
+                  navigateToCommentsPage(context);
+                });
+              },
+            ),
+            Divider(
+              thickness: 15.0,
+              color: Color(0xff290B37),
+            ),
           ],
-        ),
-        FlatButton(
-          child: Text(
-            "View all " + post.comments.length.toString() + " comments",
-            style: textStyleLigthGrey,
-          ),
-          onPressed: () {
-            setState(() {
-              the_post = post;
-              navigateToCommentsPage(context);
-            });
-          },
-        ),
-       Divider(thickness: 15.0,
-        color: Color(0xff290B37),),
-      ],
-    ));
+        ));
   }
 
   Widget getLikes(List<User> likes) {

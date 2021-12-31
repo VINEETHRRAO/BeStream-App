@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:bestream/feeds.dart';
 import 'package:bestream/login.dart';
 import 'package:bestream/main.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ void initState() {
 		()=>Navigator.pushReplacement(context,
 										MaterialPageRoute(builder:
 														(context) =>
-														LoginScreen()
+														Home()
 														)
 									)
 		);
