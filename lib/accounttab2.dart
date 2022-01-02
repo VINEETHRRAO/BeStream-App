@@ -1,4 +1,5 @@
 import 'package:bestream/models/post.dart';
+import 'package:bestream/savedposts.dart';
 import 'package:flutter/material.dart';
 import 'package:bestream/models/post.dart';
 import 'package:bestream/models/user.dart';
@@ -14,6 +15,10 @@ class _AccountTab2State extends State<AccountTab2> {
   @override
   Widget build(BuildContext context) {
     return getMain();
+  }
+   Future navigateToPage(BuildContext context) async {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const Savedpost()));
   }
 
   Widget getMain() {
@@ -32,7 +37,7 @@ class _AccountTab2State extends State<AccountTab2> {
     );
   }
 
-  List<Widget> getPosts(BuildContext context) {
+  List<Widget> getPosts (BuildContext context) {
     List<Widget> posts = [];
     int n = 0;
     for (Post post in userPosts) {
@@ -53,11 +58,19 @@ class _AccountTab2State extends State<AccountTab2> {
   }
 
   Widget getPost(BuildContext context, Post post) {
-    return Container(
-      constraints: BoxConstraints(maxHeight: 282),
-      decoration: BoxDecoration(
-          color: Color(0xff483053),
-          image: DecorationImage(image: post.image, fit: BoxFit.fill)),
+    return InkWell(
+      child: Container(
+        constraints: BoxConstraints(maxHeight: 282),
+        decoration: BoxDecoration(
+            color: Color(0xff483053),
+            image: DecorationImage(image: post.image, fit: BoxFit.fill)),
+      ),
+      onTap: () {
+        setState(() {
+          
+          navigateToPage(context);
+        });
+      },
     );
   }
     Widget getEmpty(BuildContext context) {

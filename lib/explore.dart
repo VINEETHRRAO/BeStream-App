@@ -1,7 +1,11 @@
+import 'package:bestream/feeds.dart';
+import 'package:bestream/models/post.dart';
+import 'package:bestream/userposts.dart';
 import 'package:flutter/material.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-
-
+import 'package:bestream/models/post.dart';
+import 'package:bestream/models/user.dart';
+import 'package:bestream/models/comment.dart';
+import 'package:bestream/models/global.dart';
 
 class ExplorePage extends StatefulWidget {
  const ExplorePage({Key? key}) : super(key: key);
@@ -9,11 +13,18 @@ class ExplorePage extends StatefulWidget {
  _ExplorePageState createState() => _ExplorePageState();
 }
 class _ExplorePageState extends State<ExplorePage> {
+  static Post the_post = post1;
+ 
+
+  Future navigateToPage(BuildContext context, Post post,int index) async {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => Userposts()));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff483053),
+      backgroundColor: Colors.black,
       appBar: AppBar(
           backgroundColor: Colors.purple[800],
          title: Container(
@@ -38,370 +49,69 @@ class _ExplorePageState extends State<ExplorePage> {
 
           ),
      
-         body:  Center(  
-          child:
-          GridView.count(  
-            primary: false,  
-            padding: const EdgeInsets.all(5),  
-            crossAxisSpacing: 3,  
-            mainAxisSpacing: 15,  
-            crossAxisCount: 3, 
-            children: <Widget>[  
-              Container(  
-                height: 100,width:100 ,
-             
-                child: Image.asset('assets/images/r1.jpg',width:80,height:80),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child:Image.asset('assets/images/r4.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r8.jpg'),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r11.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r2.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r5.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-
-               Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r9.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r3.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r7.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r5.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r6.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r17.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
+         body:  Center(
+        child: GridView.count(
+          primary: false,
+          padding: const EdgeInsets.all(5),
+          crossAxisSpacing: 5,
+          mainAxisSpacing: 5,
+          crossAxisCount: 3,
+          children: getPosts(context),
+               
               
-
-                Container(  
-                height: 100,width:100 ,
-             
-                child: Image.asset('assets/images/r14.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r8.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r6.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r11.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r7.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r5.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-
-               Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r1.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r10.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r15.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r3.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r2.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r16.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-
-                Container(  
-                height: 100,width:100 ,
-             
-                child: Image.asset('assets/images/r1.jpg',width:80,height:80),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child:Image.asset('assets/images/r4.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r8.jpg'),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r11.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r2.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r5.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-
-               Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r9.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r3.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r7.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r5.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r6.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r17.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
               
-
-                Container(  
-                height: 100,width:100 ,
-             
-                child: Image.asset('assets/images/r14.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r8.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r6.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r11.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r7.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r5.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-
-               Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r1.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r10.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r15.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r3.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r2.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-              Container(  
-                height: 80,width: 80,
-             
-                child: Image.asset('assets/images/r16.jpg', width: 80,height:80 ,  ),
-                color: Colors.black,  
-              ),  
-
-
-
-                  Container(
-              height:10,
-              width:20,
-              
-            ),
-             
-                Container(
-          height: 10,
-          width:10,
-
-        child: Image.network('https://www.bing.com/th/id/OGC.e4b6323e19e57f6761b1ce47b7d329e0?pid=1.7&rurl=https%3a%2f%2fwww.bluechipexterminating.com%2fwp-content%2fuploads%2f2020%2f02%2floading-gif-png-5.gif&ehk=Fkb%2fpTHkd59sw%2bOIq06%2f7g4Tgqy29TwCUoUCTChOjWw%3d',scale:0.2 ,)
-          
-          
-          ),
-
-              Container(
-              height:10,
-              width:20,
-              
-            ),
-
-              
-            ],  
           )),  
     );  
-  }  
+  } 
+  
+  List<Widget> getPosts(BuildContext context) {
+    List<Widget> posts = [];
+    int n = 0;
+    int index = 0;
+    for (Post post in userPosts) {
+     
+        n = n + 1;
+        index = index + 1;
+        posts.add(getPost(context, post, index));
+      
+    }
+    if (n == 0) {
+      posts.add(getEmpty(context));
+
+      return posts;
+    } else {
+      return posts;
+    }
+  }
+
+  Widget getPost(BuildContext context, Post post,int index) {
+    return InkWell(
+      child: Container(
+        constraints: BoxConstraints(maxHeight: 282),
+        decoration: BoxDecoration(
+            color: Color(0xff483053),
+            image: DecorationImage(image: post.image, fit: BoxFit.fill)),
+      ),
+      onTap: () {
+        setState(() {
+          the_post = post;
+          navigateToPage(context, the_post, index);
+        });
+      },
+    );
+  }
+
+  Widget getEmpty(BuildContext context) {
+    return Center(
+      child: Container(
+        child: Text(
+          "Nothing here to show :)",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+ 
 }  
     
    

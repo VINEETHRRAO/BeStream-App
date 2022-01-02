@@ -18,7 +18,7 @@ void initState() {
 		()=>Navigator.pushReplacement(context,
 										MaterialPageRoute(builder:
 														(context) =>
-														Home()
+														LoginScreen()
 														)
 									)
 		);
