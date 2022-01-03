@@ -1,0 +1,38 @@
+import 'package:bestream/feeds.dart';
+import 'package:bestream/models/post.dart';
+import 'package:bestream/savedposts.dart';
+import 'package:flutter/material.dart';
+import 'package:bestream/models/post.dart';
+import 'package:bestream/models/user.dart';
+import 'package:bestream/models/comment.dart';
+import 'package:bestream/models/global.dart';
+
+
+
+  void addcmnt() {
+    var post = the_post;
+    var text = captionController.text;
+    if (text != null) {
+      Comment newc = new Comment(user, text, DateTime.now());
+      post.comments.insert(0, newc);
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomeFeed()));
+    }
+    return;
+  }
+
+  Widget caption() {
+    return Center(
+      child: TextField(
+        controller: captionController,
+        textAlign: TextAlign.left,
+        decoration: const InputDecoration(
+            labelText: 'ENTER COMMENT',
+            border: InputBorder.none,
+            hintText: 'Your text here..',
+            hintStyle: TextStyle(color: Colors.grey)),
+      ),
+    );
+  }
+}

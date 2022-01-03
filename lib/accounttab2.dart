@@ -18,7 +18,7 @@ class _AccountTab2State extends State<AccountTab2> {
   }
    Future navigateToPage(BuildContext context) async {
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const Savedpost()));
+        MaterialPageRoute(builder: (context) => Savedpost()));
   }
 
   Widget getMain() {
@@ -37,7 +37,7 @@ class _AccountTab2State extends State<AccountTab2> {
     );
   }
 
-  List<Widget> getPosts (BuildContext context) {
+  List<Widget> getPosts(BuildContext context) {
     List<Widget> posts = [];
     int n = 0;
     for (Post post in userPosts) {

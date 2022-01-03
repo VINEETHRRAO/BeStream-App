@@ -285,7 +285,7 @@ class _SavedpostState extends State<Savedpost> {
     );
   }
 
-  Widget getComments(List<Comment> likes) {
+   Widget getComments(List<Comment> likes) {
     List<Widget> likers = [];
     DateTime now = DateTime.now();
     for (Comment comment in likes) {
@@ -338,13 +338,7 @@ class _SavedpostState extends State<Savedpost> {
                                 style: textStyleLigthGrey,
                               ),
                             ),
-                            Container(
-                              child: Text(
-                                "like",
-                                style: textStyleLigthGrey,
-                              ),
-                              margin: EdgeInsets.only(right: 10, top: 20),
-                            ),
+                           
                             Container(
                               child: Text(
                                 "Reply",
@@ -358,31 +352,7 @@ class _SavedpostState extends State<Savedpost> {
                     )
                   ],
                 ),
-                Stack(
-                  alignment: Alignment(0, 0),
-                  children: <Widget>[
-                    Container(
-                        child: Icon(
-                      Icons.favorite,
-                      color: Colors.black,
-                      size: 15,
-                    )),
-                    Container(
-                      child: IconButton(
-                        icon: Icon(Icons.favorite,
-                            color:
-                                comment.isLiked ? Colors.black : Colors.white,
-                            size: 10),
-                        onPressed: () {
-                          setState(() {
-                            comment.isLiked = comment.isLiked ? false : true;
-                            build(context);
-                          });
-                        },
-                      ),
-                    )
-                  ],
-                ),
+            
               ],
             ),
             onPressed: () {},

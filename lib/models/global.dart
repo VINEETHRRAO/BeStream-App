@@ -17,7 +17,7 @@ TextStyle textStyleLigthGrey =
 // AppbarParams appBarParams = new AppbarParams("Instagram", []);
 
 Post post1 = new Post(
-    new AssetImage('assets/images/r15.jpg'),
+    new AssetImage('assets/images/r1.jpg'),
     user,
     "My first post",
     DateTime.now(),
@@ -27,50 +27,50 @@ Post post1 = new Post(
     true);
 final User user = new User(
     'vineeth',
-    AssetImage('assets/images/r15.jpg'),
+    AssetImage('assets/images/r10.jpg'),
     [follower1, follower2, follower3],
     [follower1, follower2, follower3, follower4, follower5, follower6],
     [],
     [],
     false);
 User follower1 = new User(
-    'the_rock', AssetImage('assets/images/r15.jpg'), [], [], [], [], true);
+    'the_rock', AssetImage('assets/images/r2.jpg'), [], [], [], [], true);
 User follower2 = new User(
-    'miley_cyrus', AssetImage('assets/images/r15.jpg'), [], [], [], [], false);
+    'miley_cyrus', AssetImage('assets/images/r3.jpg'), [], [], [], [], false);
 User follower3 = new User(
-    'kim_k', AssetImage('assets/images/r15.jpg'), [], [], [], [], true);
+    'kim_k', AssetImage('assets/images/r4.jpg'), [], [], [], [], true);
 User follower4 = new User(
-    'daredevil', AssetImage('assets/images/r15.jpg'), [], [], [], [], true);
+    'daredevil', AssetImage('assets/images/r5.jpg'), [], [], [], [], true);
 User follower5 = new User(
-    'batman', AssetImage('assets/images/r15.jpg'), [], [], [], [], true);
-User follower6 = new User('peter_griffin', AssetImage('assets/images/r15.jpg'),
+    'batman', AssetImage('assets/images/r11.jpg'), [], [], [], [], true);
+User follower6 = new User('peter_griffin', AssetImage('assets/images/r7.jpg'),
     [], [], [], [], false);
 List<Post> newPosts = [];
 List<Post> userPosts = [
   new Post(
-      new AssetImage('assets/images/r5.jpg'),
+      new AssetImage('assets/images/r8.jpg'),
       user,
       "My first post",
       DateTime.now(),
       [follower1, follower2, follower3, follower4, follower5, follower6],
       [
-        new Comment(follower1, "This was amazing!", DateTime.now(), false),
-        new Comment(follower2, "Cool one", DateTime.now(), false),
+        new Comment(follower1, "This was amazing!", DateTime.now()),
+        new Comment(follower2, "Cool one", DateTime.now()),
       ],
-      true,
-      true),
+      false,
+      false),
   new Post(
-      new AssetImage('assets/images/r8.jpg'),
+      new AssetImage('assets/images/r9.jpg'),
       follower1,
       "This is such a great post though",
       DateTime.now(),
       [user, follower2, follower3, follower4, follower5],
       [
-        new Comment(follower3, "This was super cool!", DateTime.now(), false),
+        new Comment(follower3, "This was super cool!", DateTime.now()),
         new Comment(follower1, "I can't believe it's not \nbutter!",
-            DateTime.now(), false),
-        new Comment(user, "I know rite!", DateTime.now(), false),
-        new Comment(follower5, "I'm batman", DateTime.now(), false)
+            DateTime.now()),
+        new Comment(user, "I know rite!", DateTime.now()),
+        new Comment(follower5, "I'm batman", DateTime.now())
       ],
       false,
       false),
@@ -81,68 +81,41 @@ List<Post> userPosts = [
       DateTime.now(),
       [user, follower2, follower3, follower4, follower5],
       [
-        new Comment(follower3, "This was super cool!", DateTime.now(), false),
+        new Comment(follower3, "This was super cool!", DateTime.now()),
         new Comment(follower1, "I can't believe it's not \nbutter!",
-            DateTime.now(), false),
-        new Comment(user, "I know rite!", DateTime.now(), false),
-        new Comment(follower5, "I'm batman", DateTime.now(), false)
+            DateTime.now()),
+        new Comment(user, "I know rite!", DateTime.now()),
+        new Comment(follower5, "I'm batman", DateTime.now())
       ],
       false,
       false),
   new Post(
-      new AssetImage('assets/images/r8.jpg'),
+      new AssetImage('assets/images/r15.jpg'),
       follower3,
       "Found this in my backyard. \nThought I'd post it jk lol lol lolol",
       DateTime.now(),
       [user, follower2, follower3, follower4, follower5],
       [
-        new Comment(follower3, "This was super cool!", DateTime.now(), false),
+        new Comment(follower3, "This was super cool!", DateTime.now()),
         new Comment(follower1, "I can't believe it's not \nbutter!",
-            DateTime.now(), false),
-        new Comment(user, "I know rite!", DateTime.now(), false),
-        new Comment(follower5, "I'm batman", DateTime.now(), false)
+            DateTime.now()),
+        new Comment(user, "I know rite!", DateTime.now()),
+        new Comment(follower5, "I'm batman", DateTime.now())
       ],
       false,
       false),
   new Post(
-      new AssetImage('assets/images/r8.jpg'),
-      follower3,
+      new AssetImage('assets/images/r17.jpg'),
+      follower4,
       "Found this in my backyard. \nThought I'd post it jk lol lol lolol",
       DateTime.now(),
       [user, follower2, follower3, follower4, follower5],
       [
-        new Comment(follower3, "This was super cool!", DateTime.now(), false),
+        new Comment(follower3, "This was super cool!", DateTime.now()),
         new Comment(follower1, "I can't believe it's not \nbutter!",
-            DateTime.now(), false),
-        new Comment(user, "I know rite!", DateTime.now(), false),
-        new Comment(follower5, "I'm batman", DateTime.now(), false)
-      ],
-      false,
-      false),
-  new Post(
-      new AssetImage('assets/images/r5.jpg'),
-      user,
-      "My first post",
-      DateTime.now(),
-      [follower1, follower2, follower3, follower4, follower5, follower6],
-      [
-        new Comment(follower1, "This was amazing!", DateTime.now(), false),
-        new Comment(follower2, "Cool one", DateTime.now(), false),
-      ],
-      true,
-      true),
-  new Post(
-      new AssetImage('assets/images/r8.jpg'),
-      follower3,
-      "Found this in my backyard. \nThought I'd post it jk lol lol lolol",
-      DateTime.now(),
-      [user, follower2, follower3, follower4, follower5],
-      [
-        new Comment(follower3, "This was super cool!", DateTime.now(), false),
-        new Comment(follower1, "I can't believe it's not \nbutter!",
-            DateTime.now(), false),
-        new Comment(user, "I know rite!", DateTime.now(), false),
-        new Comment(follower5, "I'm batman", DateTime.now(), false)
+            DateTime.now()),
+        new Comment(user, "I know rite!", DateTime.now()),
+        new Comment(follower5, "I'm batman", DateTime.now())
       ],
       false,
       false),
@@ -153,23 +126,92 @@ List<Post> userPosts = [
       DateTime.now(),
       [follower1, follower2, follower3, follower4, follower5, follower6],
       [
-        new Comment(follower1, "This was amazing!", DateTime.now(), false),
-        new Comment(follower2, "Cool one", DateTime.now(), false),
+        new Comment(follower1, "This was amazing!", DateTime.now()),
+        new Comment(follower2, "Cool one", DateTime.now()),
       ],
-      true,
-      true),
+      false,
+      false),
   new Post(
-      new AssetImage('assets/images/r8.jpg'),
+      new AssetImage('assets/images/r11.jpg'),
+      follower5,
+      "Found this in my backyard. \nThought I'd post it jk lol lol lolol",
+      DateTime.now(),
+      [user, follower2, follower3, follower4, follower5],
+      [
+        new Comment(follower3, "This was super cool!", DateTime.now()),
+        new Comment(follower1, "I can't believe it's not \nbutter!",
+            DateTime.now(),),
+        new Comment(user, "I know rite!", DateTime.now()),
+        new Comment(follower5, "I'm batman", DateTime.now())
+      ],
+      false,
+      false),
+  new Post(
+      new AssetImage('assets/images/r16.jpg'),
+      user,
+      "My first post",
+      DateTime.now(),
+      [follower1, follower2, follower3, follower4, follower5, follower6],
+      [
+        new Comment(follower1, "This was amazing!", DateTime.now(),),
+        new Comment(follower2, "Cool one", DateTime.now(), ),
+      ],
+      false,
+      false),
+  new Post(
+      new AssetImage('assets/images/r2.jpg'),
       follower3,
       "Found this in my backyard. \nThought I'd post it jk lol lol lolol",
       DateTime.now(),
       [user, follower2, follower3, follower4, follower5],
       [
-        new Comment(follower3, "This was super cool!", DateTime.now(), false),
+        new Comment(follower3, "This was super cool!", DateTime.now(),),
         new Comment(follower1, "I can't believe it's not \nbutter!",
-            DateTime.now(), false),
-        new Comment(user, "I know rite!", DateTime.now(), false),
-        new Comment(follower5, "I'm batman", DateTime.now(), false)
+            DateTime.now(), ),
+        new Comment(user, "I know rite!", DateTime.now()),
+        new Comment(follower5, "I'm batman", DateTime.now())
+      ],
+      false,
+      false),
+  new Post(
+      new AssetImage('assets/images/r16.jpg'),
+      follower5,
+      "How did I even take this photo??",
+      DateTime.now(),
+      [user, follower2, follower3, follower4, follower5],
+      [
+        new Comment(follower3, "This was super cool!", DateTime.now()),
+        new Comment(follower1, "I can't believe it's not \nbutter!",
+            DateTime.now()),
+        new Comment(user, "I know rite!", DateTime.now()),
+        new Comment(follower5, "I'm batman", DateTime.now())
+      ],
+      false,
+      false),
+  new Post(
+      new AssetImage('assets/images/r4.jpg'),
+      follower3,
+      "Found this in my backyard. \nThought I'd post it jk lol lol lolol",
+      DateTime.now(),
+      [user, follower2, follower3, follower4, follower5],
+      [
+        new Comment(follower3, "This was super cool!", DateTime.now()),
+        new Comment(follower1, "I can't believe it's not \nbutter!",
+            DateTime.now()),
+        new Comment(user, "I know rite!", DateTime.now()),
+        new Comment(follower5, "I'm batman", DateTime.now())
+      ],
+      false,
+      false),
+  new Post(
+      new AssetImage('assets/images/r5.jpg'),
+      user,
+      "My first post",
+      DateTime.now(),
+      [follower1, follower2, follower3, follower4, follower5, follower6],
+      [
+        new Comment(follower1, "This was amazing!", DateTime.now()),
+        new Comment(follower2, "Cool one", DateTime.now()),
       ],
       false,
       false),
@@ -180,67 +222,25 @@ List<Post> userPosts = [
       DateTime.now(),
       [user, follower2, follower3, follower4, follower5],
       [
-        new Comment(follower3, "This was super cool!", DateTime.now(), false),
+        new Comment(follower3, "This was super cool!", DateTime.now()),
         new Comment(follower1, "I can't believe it's not \nbutter!",
-            DateTime.now(), false),
-        new Comment(user, "I know rite!", DateTime.now(), false),
-        new Comment(follower5, "I'm batman", DateTime.now(), false)
+            DateTime.now()),
+        new Comment(user, "I know rite!", DateTime.now()),
+        new Comment(follower5, "I'm batman", DateTime.now())
       ],
       false,
       false),
   new Post(
-      new AssetImage('assets/images/r8.jpg'),
+       AssetImage('assets/images/post2.png'),
       follower3,
       "Found this in my backyard. \nThought I'd post it jk lol lol lolol",
       DateTime.now(),
       [user, follower2, follower3, follower4, follower5],
       [
-        new Comment(follower3, "This was super cool!", DateTime.now(), false),
+        new Comment(follower3, "This was super cool!", DateTime.now()),
         new Comment(follower1, "I can't believe it's not \nbutter!",
-            DateTime.now(), false),
-        new Comment(user, "I know rite!", DateTime.now(), false),
-        new Comment(follower5, "I'm batman", DateTime.now(), false)
-      ],
-      false,
-      false),
-  new Post(
-      new AssetImage('assets/images/r5.jpg'),
-      user,
-      "My first post",
-      DateTime.now(),
-      [follower1, follower2, follower3, follower4, follower5, follower6],
-      [
-        new Comment(follower1, "This was amazing!", DateTime.now(), false),
-        new Comment(follower2, "Cool one", DateTime.now(), false),
-      ],
-      true,
-      true),
-  new Post(
-      new AssetImage('assets/images/r6.jpg'),
-      follower5,
-      "How did I even take this photo??",
-      DateTime.now(),
-      [user, follower2, follower3, follower4, follower5],
-      [
-        new Comment(follower3, "This was super cool!", DateTime.now(), false),
-        new Comment(follower1, "I can't believe it's not \nbutter!",
-            DateTime.now(), false),
-        new Comment(user, "I know rite!", DateTime.now(), false),
-        new Comment(follower5, "I'm batman", DateTime.now(), false)
-      ],
-      false,
-      false),
-  new Post(
-      new AssetImage('assets/images/post2.png'),
-      follower3,
-      "Found this in my backyard. \nThought I'd post it jk lol lol lolol",
-      DateTime.now(),
-      [user, follower2, follower3, follower4, follower5],
-      [
-        new Comment(follower3, "This was super cool!", DateTime.now(), false),
-        new Comment(follower1, "I can't believe it's not \nbutter!",
-            DateTime.now(), false),
-        new Comment(user, "I know rite!", DateTime.now(), false),
+            DateTime.now()),
+        new Comment(user, "I know rite!", DateTime.now()),
       ],
       false,
       false),

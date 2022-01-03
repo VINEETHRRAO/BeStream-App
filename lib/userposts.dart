@@ -337,13 +337,7 @@ class _UserpostsState extends State<Userposts> {
                                 style: textStyleLigthGrey,
                               ),
                             ),
-                            Container(
-                              child: Text(
-                                "like",
-                                style: textStyleLigthGrey,
-                              ),
-                              margin: EdgeInsets.only(right: 10, top: 20),
-                            ),
+                           
                             Container(
                               child: Text(
                                 "Reply",
@@ -357,31 +351,7 @@ class _UserpostsState extends State<Userposts> {
                     )
                   ],
                 ),
-                Stack(
-                  alignment: Alignment(0, 0),
-                  children: <Widget>[
-                    Container(
-                        child: Icon(
-                      Icons.favorite,
-                      color: Colors.black,
-                      size: 15,
-                    )),
-                    Container(
-                      child: IconButton(
-                        icon: Icon(Icons.favorite,
-                            color:
-                                comment.isLiked ? Colors.black : Colors.white,
-                            size: 10),
-                        onPressed: () {
-                          setState(() {
-                            comment.isLiked = comment.isLiked ? false : true;
-                            build(context);
-                          });
-                        },
-                      ),
-                    )
-                  ],
-                ),
+            
               ],
             ),
             onPressed: () {},

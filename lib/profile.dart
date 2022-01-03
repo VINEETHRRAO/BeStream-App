@@ -174,19 +174,7 @@ class _UserAccountState extends State<UserAccount> {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Container(
-                        padding: EdgeInsets.all(5),
-                        child: Center(child: Text('Insights')),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(5)),
-                      ),
-                    ),
-                  ),
+             
                 ],
               ),
             ),
