@@ -4,7 +4,7 @@ import 'package:flutter_login/flutter_login.dart';
 import 'main.dart';
 import 'package:flutter_login/theme.dart';
 
-const users = const {
+const users = {
   'dribbble@gmail.com': '12345',
   'hunter@gmail.com': 'hunter',
   'vineeth.yellur@gmail.com': 'vineeth',
