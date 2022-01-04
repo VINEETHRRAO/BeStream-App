@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:bestream/models/post.dart';
 import 'package:bestream/models/user.dart';
@@ -14,7 +13,9 @@ class HomeFeed extends StatefulWidget {
 
 class _HomeFeedState extends State<HomeFeed> {
   static int page = 1;
+
   TextEditingController captionController = TextEditingController();
+  
 
   static Post the_post = post1;
   Future navigateToLikesPage(context) async {
@@ -24,7 +25,9 @@ class _HomeFeedState extends State<HomeFeed> {
 
   Future navigateToCommentsPage(context) async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) =>getComments(the_post.comments)));
+        context,
+        MaterialPageRoute(
+            builder: (context) => getComments(the_post.comments, the_post)));
   }
 
   @override
@@ -87,6 +90,7 @@ class _HomeFeedState extends State<HomeFeed> {
                       )
                     ],
                   ),
+                  
                 ],
               ),
             ),
@@ -141,7 +145,10 @@ class _HomeFeedState extends State<HomeFeed> {
                             icon: Icon(Icons.mode_comment),
                             color: Colors.black,
                             onPressed: () {
-                               navigateToCommentsPage(context);
+                              setState(() {
+                                the_post = post;
+                                navigateToCommentsPage(context);
+                              });
                             },
                           )
                         ],
@@ -276,13 +283,15 @@ class _HomeFeedState extends State<HomeFeed> {
       ),
     );
   }
-
-  Widget getComments(List<Comment> likes) {
+Widget getComments(List<Comment> likes, Post post) {
     List<Widget> likers = [];
+    bool flag = true;
     DateTime now = DateTime.now();
     for (Comment comment in likes) {
-      int hoursAgo = (now.hour) - (comment.dateOfComment.hour - 1);
+      int hoursAgo = (now.hour) - (comment.dateOfComment.hour);
+
       likers.add(new Container(
+
           // height: 45,
           padding: EdgeInsets.all(10),
           child: FlatButton(
@@ -368,8 +377,79 @@ class _HomeFeedState extends State<HomeFeed> {
           ),
         ),
       ),
-      body: ListView(children: likers),
-      
+      body: SingleChildScrollView(
+        // ignore: unnecessary_new
+        child: Builder(
+          builder: (BuildContext context) {
+            return Center(
+              child: Column(
+                children: [
+                  const Divider(),
+                 
+                 Stack(alignment: AlignmentDirectional.centerEnd,
+                   children: [caption(flag), Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(
+                            0xff290B3A), //change background color of button
+                        onPrimary: Colors.white,
+                      ),
+                      child: Icon(
+                        Icons.add,
+                      ),
+                      onPressed: () {
+                        addcmnt(post);
+                      },
+                    ),
+                  ),],),
+                   Column(
+                    children: likers,
+                  ),
+                 
+                ],
+              ),
+            );
+          },
+        ),
+      ),
     );
+  }
+
+  void addcmnt(Post post) {
+    var text = captionController.text;
+    if (text != '') {
+      Comment newc = new Comment(user, text, DateTime.now());
+      post.comments.insert(0, newc);
+      captionController.clear();
+
+      Navigator.pop(context);
+    }
+    return;
+  }
+
+  
+  Widget caption(bool flag) {
+    return Container(
+        child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        color: Color(0xff290B3A),
+        child: TextField(
+          style: TextStyle(color: Colors.white,),
+          controller: captionController,
+          textAlign: TextAlign.left,
+          decoration: const InputDecoration(
+              labelText: 'ADD COMMENT',
+              labelStyle: TextStyle(color: Colors.grey, fontSize: 15),
+              border: InputBorder.none,
+              prefixIcon: Icon(
+                Icons.comment,
+                color: Colors.grey,
+              ),
+              hintStyle: TextStyle(color: Colors.grey)),
+        ),
+      ),
+    ));
   }
 }
