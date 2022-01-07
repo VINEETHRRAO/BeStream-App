@@ -21,15 +21,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  Duration get loginTime => Duration(milliseconds: 2250);
+  Duration get loginTime => const Duration(milliseconds: 2250);
 
   Future<String?> _authUser (LoginData data) async{
     
     debugPrint('Name: ${data.name}, Password: ${data.password}');
-      var url = Uri.parse("http://localhost:5500/users/login");
+      var url = Uri.parse("https://bestream-backend.herokuapp.com/users/login");
        Map datas = {'email': data.name, 'password': data.password};
       String body = json.encode(datas);
-      Response response = await post(url, body: body) as Response;
+      Response response = await post(url, body: body);
        debugPrint("***********************************");
       debugPrint(response.toString());
        
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  Future<String?> _signupUser(SignupData data) {
+  Future<String?> _signupUser(data) {
     debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
     return Future.delayed(loginTime).then((_) {
       return null;
