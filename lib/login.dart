@@ -25,19 +25,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<String?> _authUser (LoginData data) async{
     debugPrint('Name: ${data.name}, Password: ${data.password}');
-      var uri = Uri.parse("http://192.168.1.6:5500/users/login");
+      var uri = Uri.parse("https://bestream-backend.herokuapp.com/users/login");
       Map body = {
         'email': data.name,
         'password': data.password,
       };
       var jsonBody = json.encode(body);
       Response response = await post(uri, headers: {"Content-Type": "application/json"}, body: jsonBody);
-      var response_map = json.decode(response.body) as Map;
+      var responseMap = json.decode(response.body) as Map;
 
        
 
     return Future.delayed(loginTime).then((_) {
-      if (!response_map['isAllowed']) {
+      if (!responseMap['isAllowed']) {
         return 'User not exists or Password does not match';
       }
       return null;
