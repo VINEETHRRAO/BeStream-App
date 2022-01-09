@@ -25,6 +25,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+configurations.all {
+resolutionStrategy { force 'androidx.work:work-runtime:2.6.0' }}
+
+configurations.all {
+resolutionStrategy { force 'androidx.lifecycle:lifecycle-runtime:2.4.0-alpha01' }}
+
+configurations.all {
+resolutionStrategy { force 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01' }}
+
 android {
     compileSdkVersion 30
 
