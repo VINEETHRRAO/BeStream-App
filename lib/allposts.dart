@@ -4,46 +4,32 @@ import 'package:bestream/models/user.dart';
 import 'package:bestream/models/comment.dart';
 import 'package:bestream/models/global.dart';
 
-import 'main.dart';
-
-class HomeFeed extends StatefulWidget {
-  const HomeFeed({Key? key}) : super(key: key);
+class Allpost extends StatefulWidget {
+  const Allpost({Key? key}) : super(key: key);
 
   @override
-  _HomeFeedState createState() => _HomeFeedState();
+  _AllpostState createState() => _AllpostState();
 }
 
-class _HomeFeedState extends State<HomeFeed> {
+class _AllpostState extends State<Allpost> {
   static int page = 1;
-
-  TextEditingController captionController = TextEditingController();
+   TextEditingController captionController = TextEditingController();
 
   static Post the_post = post1;
-  static Post2 the_post2 = post2;
-   
-  Future navigateToLikesPage(context,Post post) async {
+  Future navigateToLikesPage(context) async {
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => getLikes(post.likes)));
-  }
-   Future navigateToLikesPage2(context,Post2 post) async {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => getLikes(post.likes)));
+        MaterialPageRoute(builder: (context) => getLikes(the_post.likes),
+        ));
+        
   }
 
   Future navigateToCommentsPage(context) async {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => getComments(the_post.comments, the_post)));
-  }
-    Future navigateToCommentsPage2(context,Post2 post) async {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => getComments2(post.comments, post)));
+            builder: (context) => getComments(the_post.comments,the_post)));
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return getMain();
@@ -52,6 +38,9 @@ class _HomeFeedState extends State<HomeFeed> {
   Widget getMain() {
     return Scaffold(
       backgroundColor: Color(0xff290B3A),
+      appBar: AppBar(
+        title: Text('All Posts'),
+      ),
       body: Container(
           child: ListView(
         children: <Widget>[
@@ -59,13 +48,12 @@ class _HomeFeedState extends State<HomeFeed> {
           Container(
             height: 15,
           ),
-           Column(
-            children: getFiles(context),
-          ),
           Column(
             children: getPosts(context),
-          ),
-          
+           
+          ),Divider(),
+           Center(child: Container(color:Colors.white,child: Text('You have reached the end of the page',style: textStyle,),)),
+           Divider(),
         ],
       )),
     );
@@ -73,194 +61,14 @@ class _HomeFeedState extends State<HomeFeed> {
 
   List<Widget> getPosts(BuildContext context) {
     List<Widget> posts = [];
-   
     int index = 0;
-    
-
     for (Post post in userPosts) {
-      posts.add(getPost(context, post, index));
+      if (post.isSaved) {
+        posts.add(getPost(context, post, index));
+      }
       index++;
     }
     return posts;
-  }
-    List<Widget> getFiles(BuildContext context) {
-    List<Widget> posts2 = [];
-    int index = 0;
-    
-
-    for (Post2 post in newp) {
-      posts2.add(getFile(context, post, index));
-      index++;
-    }
-    return posts2;
-  }
-
-  Widget getFile(BuildContext context, Post2 post, int index) {
-    return Container(
-        color: Colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.all(5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        width: 10,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(right: 10),
-                        child: CircleAvatar(
-                          backgroundImage: post.user.profilePicture,
-                        ),
-                      ),
-                     
-                      Text(
-                        post.user.username,
-                      ),
-                     
-                    ],
-                  ),
-                   IconButton(
-                  icon: Icon(Icons.delete,color: Color(0xff290B3A),),
-                  onPressed: () {
-                  setState(() {
-                    newp.remove(post);
-                  });
-                   },
-                )
-                ],
-              ),
-            ),
-            Container(
-        constraints: BoxConstraints(maxHeight: 300),
-        child: Image.file(post.image,width: 400,),
-      ),
-            Container(
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Stack(
-                        alignment: Alignment(0, 0),
-                        children: <Widget>[
-                          Icon(
-                            Icons.favorite,
-                            size: 30,
-                            color: post.isLiked ? Colors.red : Colors.black,
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.favorite),
-                            color: post.isLiked ? Colors.red : Colors.black,
-                            onPressed: () {
-                              setState(() {
-                                newp[index].isLiked =
-                                    post.isLiked ? false : true;
-                                if (!post.isLiked) {
-                                  post.likes.remove(user);
-                                } else {
-                                  post.likes.add(user);
-                                }
-                              });
-                            },
-                          )
-                        ],
-                      ),
-                      Stack(
-                        alignment: Alignment(0, 0),
-                        children: <Widget>[
-                          Icon(
-                            Icons.mode_comment,
-                            size: 30,
-                            color: Colors.black,
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.mode_comment),
-                            color: Colors.black,
-                            onPressed: () {
-                              setState(() {
-                                
-                                navigateToCommentsPage2(context,post);
-                              });
-                            },
-                          )
-                        ],
-                      ),
-                      Stack(
-                        alignment: Alignment(0, 0),
-                        children: <Widget>[
-                          Icon(
-                            Icons.send,
-                            size: 30,
-                            color: Colors.black,
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.send),
-                            color: Colors.black,
-                            onPressed: () {},
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                 
-                ],
-              ),
-            ),
-            FlatButton(
-              child: Text(
-                post.likes.length.toString() + " likes",
-                style: textStyleBold,
-              ),
-              onPressed: () {
-                setState(() {
-                  the_post2 = post;
-                  navigateToLikesPage2(context,post);
-                });
-              },
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(left: 15, right: 10),
-                  child: Text(
-                    post.user.username,
-                    style: textStyleBold,
-                  ),
-                ),
-                Flexible(
-                  child: Text(
-                    post.description,
-                    style: textStyle,
-                    softWrap: true,
-                  ),
-                )
-              ],
-            ),
-            FlatButton(
-              child: Text(
-                "View all " + post.comments.length.toString() + " comments",
-                style: textStyleLigthGrey,
-              ),
-              onPressed: () {
-                setState(() {
-                  the_post2 = post;
-                  navigateToCommentsPage2(context,the_post2);
-                });
-              },
-            ),
-            Divider(
-              thickness: 15.0,
-              color: Color(0xff290B37),
-            ),
-          ],
-        ));
   }
 
   Widget getPost(BuildContext context, Post post, int index) {
@@ -293,7 +101,7 @@ class _HomeFeedState extends State<HomeFeed> {
                 ],
               ),
             ),
-             Container(
+            Container(
               constraints: BoxConstraints(maxHeight: 300),
               decoration: BoxDecoration(
                   color: Color(0xff483053),
@@ -340,7 +148,7 @@ class _HomeFeedState extends State<HomeFeed> {
                             size: 30,
                             color: Colors.black,
                           ),
-                          IconButton(
+                           IconButton(
                             icon: Icon(Icons.mode_comment),
                             color: Colors.black,
                             onPressed: () {
@@ -405,7 +213,7 @@ class _HomeFeedState extends State<HomeFeed> {
               onPressed: () {
                 setState(() {
                   the_post = post;
-                  navigateToLikesPage(context,post);
+                  navigateToLikesPage(context);
                 });
               },
             ),
@@ -482,8 +290,7 @@ class _HomeFeedState extends State<HomeFeed> {
       ),
     );
   }
-
-  Widget getComments(List<Comment> likes, Post post) {
+ Widget getComments(List<Comment> likes, Post post) {
     List<Widget> likers = [];
     bool flag = true;
     DateTime now = DateTime.now();
@@ -585,31 +392,28 @@ class _HomeFeedState extends State<HomeFeed> {
               child: Column(
                 children: [
                   const Divider(),
-                  Stack(
-                    alignment: AlignmentDirectional.centerEnd,
-                    children: [
-                      caption(flag),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(
-                                0xff290B3A), //change background color of button
-                            onPrimary: Colors.white,
-                          ),
-                          child: Icon(
-                            Icons.add,
-                          ),
-                          onPressed: () {
-                            addcmnt(post);
-                          },
-                        ),
+                 
+                 Stack(alignment: AlignmentDirectional.centerEnd,
+                   children: [caption(flag), Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(
+                            0xff290B3A), //change background color of button
+                        onPrimary: Colors.white,
                       ),
-                    ],
-                  ),
-                  Column(
+                      child: Icon(
+                        Icons.add,
+                      ),
+                      onPressed: () {
+                        addcmnt(post);
+                      },
+                    ),
+                  ),],),
+                   Column(
                     children: likers,
                   ),
+                 
                 ],
               ),
             );
@@ -638,9 +442,7 @@ class _HomeFeedState extends State<HomeFeed> {
       child: Container(
         color: Color(0xff290B3A),
         child: TextField(
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          style: TextStyle(color: Colors.white,),
           controller: captionController,
           textAlign: TextAlign.left,
           decoration: const InputDecoration(
@@ -656,153 +458,4 @@ class _HomeFeedState extends State<HomeFeed> {
       ),
     ));
   }
-   Widget getComments2(List<Comment> likes, Post2 post2) {
-    List<Widget> likers = [];
-    bool flag = true;
-    DateTime now = DateTime.now();
-    for (Comment comment in likes) {
-      int hoursAgo = (now.hour) - (comment.dateOfComment.hour);
-
-      likers.add(new Container(
-
-          // height: 45,
-          padding: EdgeInsets.all(10),
-          child: FlatButton(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(right: 10),
-                      width: 30,
-                      height: 30,
-                      child: CircleAvatar(
-                        backgroundImage: comment.user.profilePicture,
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        RichText(
-                          text: new TextSpan(
-                            style: new TextStyle(
-                              fontSize: 14.0,
-                              color: Colors.black,
-                            ),
-                            children: <TextSpan>[
-                              new TextSpan(
-                                  text: comment.user.username,
-                                  style: textStyleBold),
-                              new TextSpan(text: ' ', style: textStyle),
-                              new TextSpan(
-                                  text: comment.comment, style: textStyle),
-                            ],
-                          ),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(right: 10, top: 20),
-                              child: Text(
-                                hoursAgo.toString() + "h",
-                                style: textStyleLigthGrey,
-                              ),
-                            ),
-                            Container(
-                              child: Text(
-                                "Reply",
-                                style: textStyleLigthGrey,
-                              ),
-                              margin: EdgeInsets.only(right: 10, top: 20),
-                            )
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
-            onPressed: () {},
-          )));
-    }
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xff290B37),
-        title: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Text(
-                    'Comments',
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        // ignore: unnecessary_new
-        child: Builder(
-          builder: (BuildContext context) {
-            return Center(
-              child: Column(
-                children: [
-                  const Divider(),
-                  Stack(
-                    alignment: AlignmentDirectional.centerEnd,
-                    children: [
-                      caption(flag),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(
-                                0xff290B3A), //change background color of button
-                            onPrimary: Colors.white,
-                          ),
-                          child: Icon(
-                            Icons.add,
-                          ),
-                          onPressed: () {
-                            addcmnt2(post2);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: likers,
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  void addcmnt2(Post2 post) {
-    var text = captionController.text;
-    if (text != '') {
-      Comment newc = new Comment(user, text, DateTime.now());
-      post.comments.insert(0, newc);
-      captionController.clear();
-
-      Navigator.pop(context);
-    }
-    return;
-  }
-
- 
 }

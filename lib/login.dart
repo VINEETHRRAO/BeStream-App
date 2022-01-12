@@ -91,6 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return FlutterLogin(
       title: null,
+      loginAfterSignUp: false,
       logo: AssetImage(
         'assets/images/transparent.png',
       ),
