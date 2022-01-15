@@ -92,15 +92,13 @@ class _HomeState extends State<Home> {
               Container(
                 child: IconButton(
                   icon: Icon(Icons.person),
-                     /* color: (_page == 5) ? Colors.grey : Colors.white),*/
+                  /* color: (_page == 5) ? Colors.grey : Colors.white),*/
                   tooltip: 'profile',
                   iconSize: 40,
                   onPressed: () {
                     setState(() {
-                      
+                      navigateToSubPage(context);
                     });
-                    
-                   
                   },
                 ),
               ),
@@ -130,7 +128,6 @@ class _HomeState extends State<Home> {
           ),
           new Container(
             color: Colors.black,
-            
           ),
         ],
         controller: pageController,
