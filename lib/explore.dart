@@ -7,6 +7,8 @@ import 'package:bestream/models/user.dart';
 import 'package:bestream/models/comment.dart';
 import 'package:bestream/models/global.dart';
 
+import 'allposts.dart';
+
 class ExplorePage extends StatefulWidget {
  const ExplorePage({Key? key}) : super(key: key);
  @override
@@ -18,7 +20,7 @@ class _ExplorePageState extends State<ExplorePage> {
 
   Future navigateToPage(BuildContext context, Post post,int index) async {
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => Userposts()));
+        MaterialPageRoute(builder: (context) => Allpost()));
   }
 
   @override
@@ -86,11 +88,9 @@ class _ExplorePageState extends State<ExplorePage> {
 
   Widget getPost(BuildContext context, Post post,int index) {
     return InkWell(
-      child: Container(
-        constraints: BoxConstraints(maxHeight: 282),
-        decoration: BoxDecoration(
-            color: Color(0xff483053),
-            image: DecorationImage(image: post.image, fit: BoxFit.fill)),
+      child:   Container(
+        constraints: BoxConstraints(maxHeight: 300),
+        child: Image(image: post.image),
       ),
       onTap: () {
         setState(() {

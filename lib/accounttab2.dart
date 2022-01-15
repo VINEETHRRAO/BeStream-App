@@ -59,11 +59,9 @@ class _AccountTab2State extends State<AccountTab2> {
 
   Widget getPost(BuildContext context, Post post) {
     return InkWell(
-      child: Container(
-        constraints: BoxConstraints(maxHeight: 282),
-        decoration: BoxDecoration(
-            color: Color(0xff483053),
-            image: DecorationImage(image: post.image, fit: BoxFit.fill)),
+      child:   Container(
+        constraints: BoxConstraints(maxHeight: 300),
+        child: Image(image: post.image),
       ),
       onTap: () {
         setState(() {

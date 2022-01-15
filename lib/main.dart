@@ -4,6 +4,7 @@ import 'package:bestream/feeds.dart';
 import 'package:bestream/profile.dart';
 import 'package:bestream/shop.dart';
 import 'package:bestream/splash.dart';
+import 'package:bestream/stream.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -40,8 +41,9 @@ class _HomeState extends State<Home> {
   int _page = 0;
 
   Future navigateToSubPage(context) async {
-  Navigator.push(context, MaterialPageRoute(builder: (context) =>UserAccount()));
-}
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => UserAccount()));
+  }
 
   void navigationTapped(int page) {
     //Animating Page
@@ -89,12 +91,14 @@ class _HomeState extends State<Home> {
               ),
               Container(
                 child: IconButton(
-                  icon: Icon(Icons.person,
-                      color: (_page == 7) ? Colors.grey : Colors.white),
+                  icon: Icon(Icons.person),
+                  /* color: (_page == 5) ? Colors.grey : Colors.white),*/
                   tooltip: 'profile',
                   iconSize: 40,
                   onPressed: () {
-                   navigateToSubPage(context);
+                    setState(() {
+                      navigateToSubPage(context);
+                    });
                   },
                 ),
               ),
@@ -116,6 +120,7 @@ class _HomeState extends State<Home> {
           ),
           new Container(
             color: Colors.black,
+            child: VideoApp(),
           ),
           new Container(
             color: Colors.black,
@@ -123,10 +128,6 @@ class _HomeState extends State<Home> {
           ),
           new Container(
             color: Colors.black,
-          ),
-          new Container(
-            color: Colors.black,
-            child: HomeFeed(),
           ),
         ],
         controller: pageController,

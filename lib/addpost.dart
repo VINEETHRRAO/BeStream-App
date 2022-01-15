@@ -39,7 +39,11 @@ class UserOptionsState extends State<UserOptions> {
   int i = 0;
   int n = 0;
 
-  
+  void navigationTapped(int page) {
+    //Animating Page
+    pageController.jumpToPage(page);
+  }
+
   void _setImage() async {
     final imageFile = File(await ImagePicker()
         .pickImage(source: ImageSource.gallery)
@@ -59,7 +63,6 @@ class UserOptionsState extends State<UserOptions> {
       ifile = cameraFile;
     });
   }
-
 
   TextEditingController captionController = TextEditingController();
   @override
@@ -109,7 +112,6 @@ class UserOptionsState extends State<UserOptions> {
                       child: Icon(Icons.next_plan),
                       onPressed: addpost,
                     ),
-                    
                   ),
                 ],
               ),
@@ -137,16 +139,19 @@ class UserOptionsState extends State<UserOptions> {
     );
   }
 
-  void addpost(){
+  void addpost() {
     var file = ifile;
+    int c = 0;
+
     var text = captionController.text;
     if (file != null && text != null) {
-      Post newpost = Post(AssetImage(file.path), user, text, DateTime.now(), [],
+    //  Filer f = Filer(ifile!);
+     // filer.insert(c, f);
+      //c++;
+      Post2 newpost = Post2(file, user, text, DateTime.now(), [],
           [], false, false);
-     
-      userPosts.insert(0, newpost);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeFeed()));
-      
+      navigationTapped(0);
+      newp.insert(0, newpost);
     }
     return;
   }

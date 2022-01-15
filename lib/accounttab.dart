@@ -3,6 +3,7 @@ import 'package:bestream/models/post.dart';
 import 'package:bestream/userposts.dart';
 import 'package:flutter/material.dart';
 import 'package:bestream/models/post.dart';
+import 'package:path/path.dart' as path;
 import 'package:bestream/models/user.dart';
 import 'package:bestream/models/comment.dart';
 import 'package:bestream/models/global.dart';
@@ -14,11 +15,10 @@ class AccountTab1 extends StatefulWidget {
 
 class _AccountTab1State extends State<AccountTab1> {
   static Post the_post = post1;
- 
 
-  Future navigateToPage(BuildContext context, Post post,int index) async {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => Userposts()));
+  Future navigateToPage(BuildContext context, Post2 post, int index) async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Userposts()));
   }
 
   @override
@@ -46,7 +46,8 @@ class _AccountTab1State extends State<AccountTab1> {
     List<Widget> posts = [];
     int n = 0;
     int index = 0;
-    for (Post post in userPosts) {
+   
+    for (Post2 post in newp) {
       if (post.user == user) {
         n = n + 1;
         index = index + 1;
@@ -62,18 +63,17 @@ class _AccountTab1State extends State<AccountTab1> {
     }
   }
 
-  Widget getPost(BuildContext context, Post post,int index) {
+  Widget getPost(BuildContext context, Post2 post, int index) {
     return InkWell(
       child: Container(
-        constraints: BoxConstraints(maxHeight: 282),
-        decoration: BoxDecoration(
-            color: Color(0xff483053),
-            image: DecorationImage(image: post.image, fit: BoxFit.fill)),
+        color: Colors.white,
+        constraints: BoxConstraints(maxHeight: 300),
+        child: Image.file(post.image,fit: BoxFit.cover,),
       ),
       onTap: () {
         setState(() {
-          the_post = post;
-          navigateToPage(context, the_post, index);
+          
+          navigateToPage(context, post, index);
         });
       },
     );
@@ -89,5 +89,4 @@ class _AccountTab1State extends State<AccountTab1> {
       ),
     );
   }
-
 }

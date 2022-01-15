@@ -20,6 +20,19 @@ class Post {
 
   Post(this.image, this.user, this.description, this.date, this.likes, this.comments, this.isLiked, this.isSaved);
 }
+class Post2 {
+  File image;
+  String description;
+  User user;
+  List<User> likes;
+  List<Comment> comments;
+  DateTime date;
+  bool isLiked;
+  bool isSaved;
+
+  Post2(this.image, this.user, this.description, this.date, this.likes, this.comments, this.isLiked, this.isSaved);
+}
+
 
 
 

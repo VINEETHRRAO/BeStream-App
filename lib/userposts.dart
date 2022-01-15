@@ -17,16 +17,16 @@ class _UserpostsState extends State<Userposts> {
   static Post the_post = post1;
   TextEditingController captionController = TextEditingController();
 
-  Future navigateToLikesPage(context) async {
+  Future navigateToLikesPage(context,Post2 post) async {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => getLikes(the_post.likes)));
   }
 
-  Future navigateToCommentsPage(context) async {
+  Future navigateToCommentsPage(context,Post2 post) async {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => getComments(the_post.comments,the_post)));
+            builder: (context) => getComments(post.comments,post)));
   }
 
   @override
@@ -62,7 +62,7 @@ class _UserpostsState extends State<Userposts> {
   List<Widget> getPosts(BuildContext context) {
     List<Widget> posts = [];
     int index = 0;
-    for (Post post in userPosts) {
+    for (Post2 post in newp) {
       if (post.user == user) {
         posts.add(getPost(context, post, index));
       }
@@ -70,7 +70,7 @@ class _UserpostsState extends State<Userposts> {
     }
     return posts;
   }
-Widget getPost(BuildContext context, Post post, int index) {
+Widget getPost(BuildContext context, Post2 post, int index) {
     return Container(
         color: Colors.white,
         child: Column(
@@ -97,16 +97,20 @@ Widget getPost(BuildContext context, Post post, int index) {
                       )
                     ],
                   ),
+                   IconButton(
+                  icon: Icon(Icons.delete,color: Color(0xff290B3A),),
+                  onPressed: () {
+                  setState(() {
+                    newp.remove(post);
+                  });
+                   },),
                 ],
               ),
             ),
-            Container(
-              constraints: BoxConstraints(maxHeight: 300),
-              decoration: BoxDecoration(
-                  color: Color(0xff483053),
-                  image:
-                      DecorationImage(image: post.image, fit: BoxFit.fitWidth)),
-            ),
+             Container(
+        constraints: BoxConstraints(maxHeight: 300),
+        child: Image.file(post.image,width: 400,),
+      ),
             Container(
               color: Colors.white,
               child: Row(
@@ -127,7 +131,7 @@ Widget getPost(BuildContext context, Post post, int index) {
                             color: post.isLiked ? Colors.red : Colors.black,
                             onPressed: () {
                               setState(() {
-                                userPosts[index].isLiked =
+                                newp[index].isLiked =
                                     post.isLiked ? false : true;
                                 if (!post.isLiked) {
                                   post.likes.remove(user);
@@ -152,8 +156,8 @@ Widget getPost(BuildContext context, Post post, int index) {
                             color: Colors.black,
                             onPressed: () {
                               setState(() {
-                                the_post = post;
-                                navigateToCommentsPage(context);
+                                
+                                navigateToCommentsPage(context,post);
                               });
                             },
                           )
@@ -176,31 +180,7 @@ Widget getPost(BuildContext context, Post post, int index) {
                       )
                     ],
                   ),
-                  Stack(
-                    alignment: Alignment(0, 0),
-                    children: <Widget>[
-                      Icon(
-                        Icons.bookmark,
-                        size: 30,
-                        color: post.isSaved ? Colors.green : Colors.black,
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.bookmark),
-                        color: post.isSaved ? Colors.green : Colors.black,
-                        onPressed: () {
-                          setState(() {
-                            userPosts[index].isSaved =
-                                post.isSaved ? false : true;
-                            if (!post.isSaved) {
-                              user.savedPosts.remove(post);
-                            } else {
-                              user.savedPosts.add(post);
-                            }
-                          });
-                        },
-                      )
-                    ],
-                  )
+                 
                 ],
               ),
             ),
@@ -211,8 +191,8 @@ Widget getPost(BuildContext context, Post post, int index) {
               ),
               onPressed: () {
                 setState(() {
-                  the_post = post;
-                  navigateToLikesPage(context);
+                  
+                  navigateToLikesPage(context,post);
                 });
               },
             ),
@@ -242,8 +222,8 @@ Widget getPost(BuildContext context, Post post, int index) {
               ),
               onPressed: () {
                 setState(() {
-                  the_post = post;
-                  navigateToCommentsPage(context);
+                  
+                  navigateToCommentsPage(context,post);
                 });
               },
             ),
@@ -289,7 +269,7 @@ Widget getPost(BuildContext context, Post post, int index) {
       ),
     );
   }
- Widget getComments(List<Comment> likes, Post post) {
+ Widget getComments(List<Comment> likes, Post2 post) {
     List<Widget> likers = [];
     bool flag = true;
     DateTime now = DateTime.now();
@@ -422,7 +402,7 @@ Widget getPost(BuildContext context, Post post, int index) {
     );
   }
 
-  void addcmnt(Post post) {
+  void addcmnt(Post2 post) {
     var text = captionController.text;
     if (text != '') {
       Comment newc = new Comment(user, text, DateTime.now());
